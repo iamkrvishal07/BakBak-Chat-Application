@@ -29,7 +29,7 @@ Login Page – User login using email and password
 
 
 **Home Page** – Displays all users with search functionality
-<img width="1359" height="755" alt="Image" src="https://github.com/user-attachments/assets/8ffe470a-e3b3-46c5-9e39-32f7d69b8c95" />
+<img width="1359" height="830" alt="Image" src="https://github.com/user-attachments/assets/6ff1fed0-e45e-4d69-b208-0e1a51cddbbc" />
 
 
 **Chat Page** – One-to-one chat with emojis, images, typing

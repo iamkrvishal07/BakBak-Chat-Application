@@ -14,10 +14,13 @@ const port=process.env.PORT || 5000
 
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://bakbak-chat-application-frontend.onrender.com",
     credentials:true
 }))
 
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
+});
 
 app.use(express.json())
 app.use(cookieParser())

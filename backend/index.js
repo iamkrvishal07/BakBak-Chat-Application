@@ -18,6 +18,9 @@ app.use(cors({
     credentials:true
 }))
 
+app.get("/", (req, res) => {
+  res.send("Server is up and running!");
+});
 
 app.use(express.json())
 app.use(cookieParser())

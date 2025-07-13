@@ -90,6 +90,33 @@ function MessageArea() {
     setShowPicker(false);
   };
 
+  // Clear messages on user switch
+  useEffect(() => {
+    if (selectedUser) {
+      dispatch(setMessages([]));
+    }
+  }, [selectedUser, dispatch]);
+
+  // Fetch chat history when user changes
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (!selectedUser) return;
+
+      try {
+        const res = await axios.get(`${serverUrl}/api/message/get/${selectedUser._id}`, {
+          withCredentials: true,
+        });
+
+        dispatch(setMessages(res.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchMessages();
+  }, [selectedUser, dispatch]);
+
+  //  Socket Events
   useEffect(() => {
     const handleNewMessage = (msg) => {
       dispatch(setMessages([
@@ -120,19 +147,12 @@ function MessageArea() {
   }, [socket, messages, selectedUser, userData._id, dispatch]);
 
   return (
-    <div
-      className={`lg:w-[70%] relative ${
-        selectedUser ? "flex" : "hidden"
-      } lg:flex w-full h-full bg-[#1e1e2f] overflow-hidden`}
-    >
+    <div className={`lg:w-[70%] relative ${selectedUser ? "flex" : "hidden"} lg:flex w-full h-full bg-[#1e1e2f] overflow-hidden`}>
       {selectedUser ? (
         <div className="w-full h-full flex flex-col overflow-hidden px-4">
           {/* Top Bar */}
           <div className="w-full h-[100px] bg-gradient-to-br from-[#6c5ce7] to-[#a29bfe] rounded-b-[30px] shadow-lg flex items-center px-6 gap-4">
-            <div
-              className="cursor-pointer"
-              onClick={() => dispatch(setSelectedUser(null))}
-            >
+            <div className="cursor-pointer" onClick={() => dispatch(setSelectedUser(null))}>
               <IoIosArrowRoundBack className="w-8 h-8 text-white" />
             </div>
             <div className="w-[50px] h-[50px] rounded-full overflow-hidden bg-white shadow-md">

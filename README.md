@@ -64,5 +64,6 @@ Maintained a `userId -> socketId` map to emit events to specific users.
 **Disconnect Handling**:  
 Cleaned up socket data on disconnect and updated online users globally.
 
+---
 
 
